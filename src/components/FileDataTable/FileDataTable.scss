@@ -1,0 +1,13 @@
+.file-data-table {
+  @apply w-full border-collapse mt-12;
+
+  &-header__row,
+  &-body__row {
+    @apply border-[1px] border-solid border-gray-300;
+  }
+
+  &-header__column,
+  &-body__column {
+    padding: 15px;
+  }
+}

@@ -1,0 +1,7 @@
+.file-data-table-header {
+  @apply bg-primary text-white;
+
+  &__column {
+    text-align: start;
+  }
+}

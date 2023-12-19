@@ -1,28 +1,33 @@
-import { FileData } from '../../../../interfaces/file.interfaces';
+import { FileData } from 'interfaces/file.interfaces';
+
+export const tableDataKeys: string[] = [
+  'dataId',
+  'userName',
+  'firstName',
+  'lastName',
+  'city',
+  'address',
+  'zip',
+  'creditCardCode',
+  'cvv',
+  'name',
+  'date',
+];
 
 interface FileDataRowProps {
   data: FileData;
 }
 
 export default function FileDataRow({ data }: FileDataRowProps) {
-  const {
-    createdAt,
-    updatedAt,
-    fileId,
-    id,
-    ...fileData
-  } = data;
-  const values = Object.values(fileData);
-
   return (
     <tr className="file-data-table-body__row">
       {
-        values.map((value: string | number, index: number) => (
+        tableDataKeys.map(tableDataKey => (
           <td
             className="file-data-table-body__column"
-            key={index}
+            key={tableDataKey}
           >
-            {value}
+            {data[tableDataKey as keyof typeof data]}
           </td>
         ))
       }

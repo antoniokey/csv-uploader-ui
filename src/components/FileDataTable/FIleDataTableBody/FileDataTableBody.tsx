@@ -1,4 +1,5 @@
-import { FileData } from '../../../interfaces/file.interfaces';
+import { FileData } from 'interfaces/file.interfaces';
+
 import FileDataRow from './FileDataRow/FileDataRow';
 
 interface FileDataTableBodyProps {
@@ -9,7 +10,7 @@ export default function FileDataTableBody({ fileData }: FileDataTableBodyProps) 
   return (
     <tbody className="file-data-table-body">
       {
-        fileData.map((fileDataItem: any) => (
+        fileData.map(fileDataItem => (
           <FileDataRow
             key={fileDataItem.id}
             data={fileDataItem}

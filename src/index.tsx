@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ToastContainer } from 'react-toastify';
 
 import './index.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { configAxios } from './config/axios';
+
+configAxios();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +18,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App />
+
+    <ToastContainer
+      closeOnClick={true}
+      autoClose={3000}
+      position='bottom-right'
+    />
   </React.StrictMode>
 );
 

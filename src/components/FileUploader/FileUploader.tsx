@@ -5,12 +5,13 @@ import {
   SetStateAction,
   useState,
 } from 'react';
+import { toast } from 'react-toastify';
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
+import { UploadedFile } from 'interfaces/file.interfaces';
 
 import './FileUploader.scss';
-
-import { UploadedFile } from '../../interfaces/file.interfaces';
 
 interface FileUploaderProps {
   setUploadedFile: Dispatch<SetStateAction<UploadedFile | undefined>>;
@@ -29,12 +30,18 @@ export default function FileUploader({ setUploadedFile }: FileUploaderProps) {
 
       try {
         const uploadedFile: UploadedFile = (
-          await axios.post(`${process.env.REACT_APP_API_URL}/files/upload`, formData)
+          await axios.post('/files/upload', formData)
         ).data;
   
         setUploadedFile(uploadedFile);
-      } catch(err: any) {
-        console.log(err.response.data.message)
+
+        toast.success('File was successfully uploaded');
+      } catch(err: unknown) {
+        if (err instanceof AxiosError) {
+          toast.error(err.response?.data?.message || 'Something went wrong, try again');
+        } else {
+          toast.error('Something went wrong, try again');
+        }
       }
     }
   };
@@ -59,13 +66,7 @@ export default function FileUploader({ setUploadedFile }: FileUploaderProps) {
           onChange={onInputChange}
         />
 
-        {
-          file && (
-            <button type="submit">
-              Upload file
-            </button>
-          )
-        }
+        {file && <button type="submit">Upload file</button>}
       </form>
     </div> 
   );
